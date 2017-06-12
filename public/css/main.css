@@ -1,9 +1,25 @@
 body{
 	background-color:#f4ff81;
 	font-family: 'Raleway', sans-serif;
-	color:#bf360c;
+	color:#610B0B;
 }
 img{
-	width: 95%;
-	height: 130px;
+	width: 92%;
+	height: 150px;
+	webkit-filter: drop-shadow(4px 4px 4px #222);
+  	
+}
+
+.img-modal{
+	width:30%;
+	height: 160px;
+	webkit-filter: drop-shadow(4px 4px 4px #222);
+  	filter: drop-shadow(4px 4px 4px #222);
+}
+
+label{
+	display:inline-block;
+}
+h6{
+	display:inline-block;
 }

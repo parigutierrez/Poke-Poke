@@ -47,7 +47,7 @@ $(document).ready(function(){
 
 	]
 
-	var plantilla = "<div class='col s4'>"+'<img src="__imagen__" class="center-align">' + 
+	var plantilla = "<div class='col s4 link-modal' data-link= '__url__'>"+'<img src="__imagen__">' + 
 					'<h5 class="center-align">' + '__nombrePokemon__'+ '</h5>' + '</div>'
 
 	$.getJSON("http://pokeapi.co/api/v2/pokemon/", function(response){
@@ -60,11 +60,67 @@ $(document).ready(function(){
 	var $contPokemones = $("#pokemons");
 	var plantillaFinal = "";
 	pokemons.forEach(function (pokemon, indice) {
-		plantillaFinal += plantilla.replace("__nombrePokemon__", pokemon.name).replace("__imagen__", imagenes[indice].imagen);
+		plantillaFinal += plantilla.replace("__nombrePokemon__", pokemon.name).replace("__imagen__", imagenes[indice].imagen)
+		.replace("__url__", "http://pokeapi.co/api/v2/pokemon-species/"+(indice+1)+"/");
+
 	});
 	$contPokemones.html(plantillaFinal);  
-		
+	var div= $(".link-modal");
+	div.click(obtenerDatos);
 	}
+
+	
+
+	function obtenerDatos(){
+		console.log(this);
+		var rutaImagen = $(this).find("img").attr('src');
+		console.log(rutaImagen);
+		var nombrePokes = $(this).find("h5").text();
+		console.log(nombrePokes);
+		console.log(this.dataset.link);
+		$.getJSON(this.dataset.link, function(response){
+			console.log(response);
+			var habitat= response.habitat.name;
+			console.log(habitat);
+			var color= response.color.name;
+			console.log(color);
+			var shape= response.shape.name;
+			console.log(shape);
+			var genera = response.genera[0].genus;
+			console.log(genera);
+
+			imprimirDatos({
+				src: rutaImagen,
+				nombre: nombrePokes,
+				habitat: habitat,
+				color: color,
+				shape: shape,
+				genera: genera
+			})
+
+		})
+	}
+
+	function imprimirDatos(objetoDatos){
+	
+	console.log(objetoDatos);
+	var nombre = $("#nombre");
+	var imagen= $("#imageModal");
+	var habitat = $("#habitat");
+	var color = $("#color");
+	var shape = $("#shape");
+	var genera = $("#genera");
+
+	nombre.text(objetoDatos.nombre);
+	imagen.attr("src",objetoDatos.src);
+	habitat.text(objetoDatos.habitat);
+	color.text(objetoDatos.color);
+	shape.text(objetoDatos.shape);
+	genera.text(objetoDatos.genera);
+
+	}
+
+	$('.modal').modal();
 });
 
 
