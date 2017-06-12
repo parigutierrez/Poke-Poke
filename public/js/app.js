@@ -1,132 +1,71 @@
-/*var xhr = new XMLHttpRequest();
 
-xhr.onreadystatechange = function (e) {
-	if (this.readyState === 4) {
-		if (this.status === 200) {
-			var squads = JSON.parse(this.response);	
-			crearSquads(squads);
-		}
-		
-	}
-};
+$(document).ready(function(){
 
-xhr.open("GET", "data/squads.json");
+	var xhr = new XMLHttpRequest();
 
-xhr.send();
+	var imagenes = [
 
-function crearSquads(squads) {
-	var ul = document.getElementById("squads");
+	{ "imagen":"img/bulbasaur.png" },
 
-	squads.forEach(function (squad) {
-		var li = document.createElement("li");
-		li.textContent = squad.nombre;
+	{ "imagen":"img/ivysaur.png" },
 
-		ul.appendChild(li);
-	});
-}
-*/
+	{ "imagen":"img/venusaur.png" },
 
+	{ "imagen":"img/charmander.png" },
 
+	{ "imagen":"img/charmeleon.png" },
 
-/*
-xhr.onreadystatechange = function (e) {
-	if (this.readyState === 4) {
-		if (this.status === 200) {
-			var response = JSON.parse(this.response);
-			var pokemons = response.results;
-			// var squads = JSON.parse(this.response);	
-			crearPokemons(pokemons);
-		}
-		
-	}
-};
+	{ "imagen":"img/charizard.png" },
 
-xhr.open("GET", "http://pokeapi.co/api/v2/pokemon/");
+	{ "imagen":"img/squirtle.png" },
 
-xhr.send();
+	{ "imagen":"img/wartortle.png" },
 
-function crearPokemons(pokemons) {
-	var ul = document.getElementById("pokemons");
+	{ "imagen":"img/blastoise.png" },
 
-	pokemons.forEach(function (pokemon) {
-		var li = document.createElement("li");
-		li.textContent = pokemon.name;
+	{ "imagen":"img/caterpie.png" },
 
-		ul.appendChild(li);
-	});
-}
+	{ "imagen":"img/metapod.png" },
 
-*/
-var xhr = new XMLHttpRequest();
+	{ "imagen":"img/butterfree.png" },
 
-var imagenes = [
+	{ "imagen":"img/weedle.png" },
 
-{ "imagen":"img/bulbasaur.png" },
+	{ "imagen":"img/kakuna.png" },
 
-{ "imagen":"img/ivysaur.png" },
+	{ "imagen":"img/beedrill.png" },
 
-{ "imagen":"img/venusaur.png" },
+	{ "imagen":"img/pidgey.png" },
 
-{ "imagen":"img/charmander.png" },
+	{ "imagen":"img/pidgeotto.png" },
 
-{ "imagen":"img/charmeleon.png" },
+	{ "imagen":"img/pidgeot.png" },
 
-{ "imagen":"img/charizard.png" },
+	{ "imagen":"img/rattata.png" },
 
-{ "imagen":"img/squirtle.png" },
+	{ "imagen":"img/raticate.png" },
 
-{ "imagen":"img/wartortle.png" },
+	]
 
-{ "imagen":"img/blastoise.png" },
+	var plantilla = "<div class='col s4'>"+'<img src="__imagen__" class="center-align">' + 
+					'<h5 class="center-align">' + '__nombrePokemon__'+ '</h5>' + '</div>'
 
-{ "imagen":"img/caterpie.png" },
-
-{ "imagen":"img/metapod.png" },
-
-{ "imagen":"img/butterfree.png" },
-
-{ "imagen":"img/weedle.png" },
-
-{ "imagen":"img/kakuna.png" },
-
-{ "imagen":"img/beedrill.png" },
-
-{ "imagen":"img/pidgey.png" },
-
-{ "imagen":"img/pidgeotto.png" },
-
-{ "imagen":"img/pidgeot.png" },
-
-{ "imagen":"img/rattata.png" },
-
-{ "imagen":"img/raticate.png" },
-
-]
-
-var plantilla = "<div class='col s3 card tarjeta hoverable'>"+ 
-					'<img src="**imagen**" class="center-align">' + 
-					'<h6 class="center-align">' +
-					'**nombrePokemon**'+ '</h6>' +
-					'</div>'
-
-$.getJSON("http://pokeapi.co/api/v2/pokemon/", function(response){
+	$.getJSON("http://pokeapi.co/api/v2/pokemon/", function(response){
 	//console.log(response);
 	var pokemons = response.results;
 	crearPokemons(pokemons, imagenes);
-})
+	})
 
-function crearPokemons(pokemons, imagenes) {
+	function crearPokemons(pokemons, imagenes) {
 	var $contPokemones = $("#pokemons");
-var plantillaFinal = "";
+	var plantillaFinal = "";
 	pokemons.forEach(function (pokemon, indice) {
-		plantillaFinal += plantilla.replace("**nombrePokemon**", pokemon.name)
-				.replace("**imagen**", imagenes[indice].imagen);
-  });
+		plantillaFinal += plantilla.replace("__nombrePokemon__", pokemon.name).replace("__imagen__", imagenes[indice].imagen);
+	});
 	$contPokemones.html(plantillaFinal);  
-	
-	
-}
-
+		
+	}
+});
 
 
 
