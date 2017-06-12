@@ -1,7 +1,9 @@
 body{
-	background-color:yellow;
+	background-color:#f4ff81;
+	font-family: 'Raleway', sans-serif;
+	color:#bf360c;
 }
-.poke{
-	width: 20%;
-	height: 20%;
+img{
+	width: 95%;
+	height: 120px;
 }
